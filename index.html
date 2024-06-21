@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Tutorial Sample Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        /*--- page ---*/
+        body {
+            padding: 0;
+            margin: 0;
+            background: #ffe6f0;
+            color: #d8bfd8;
+        }
+
+        /*--- navigation bar ---*/
+        .navbar {
+            background: #ff80aa;
+        }
+
+        .nav-link,
+        .navbar-brand {
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .nav-link {
+            margin-right: 1em !important;
+        }
+
+        .nav-link:hover {
+            color: #000;
+        }
+
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+
+        /*--- header ---*/
+        .header {
+            background-image: url('header-background.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: #fff;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .overlay {
+            position: absolute;
+            min-height: 100%;
+            min-width: 100%;
+            left: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .description {
+            position: relative;
+            z-index: 1;
+        }
+
+        .description h1 {
+            color: #ff80aa;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .description p {
+            color: #fff;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+
+        .description button {
+            border: 1px solid #ff80aa;
+            background: #ff80aa;
+            border-radius: 0;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .description button:hover {
+            border: 1px solid #fff;
+            background: #fff;
+            color: #000;
+        }
+
+        /*--- feature section ---*/
+        .features {
+            margin: 4em auto;
+            padding: 1em;
+        }
+
+        .feature-title {
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .features img {
+            -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 16px;
+        }
+
+        .features .form-control,
+        .features input {
+            border-radius: 0;
+        }
+
+        .features .btn {
+            background-color: #ff6699;
+            border: 1px solid #ff6699;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .features .btn:hover {
+            background-color: #333;
+            border: 1px solid #333;
+        }
+
+        /*--- team section ---*/
+        .background {
+            background: #f8d7da;
+            padding: 4em 0;
+        }
+
+        .team {
+            color: #5e5e55;
+            padding: 0 180px;
+        }
+
+        .team .card-columns {
+            -webkit-column-count: 4;
+            -moz-column-count: 4;
+            column-count: 4;
+        }
+
+        .team .card {
+            background: none;
+            border: none;
+        }
+
+        .team .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+
+        .team .card-img-top {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        /*--- footer ---*/
+        .page-footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 60px 0 30px;
+        }
+
+        .footer-copytight {
+            color: #666;
+            padding: 40px 0;
+        }
+
+        /*--- modal ---*/
+        #demo-modal .modal-content {
+            border-radius: 0;
+            padding: 2rem;
+        }
+
+        #demo-modal .modal-header {
+            border-bottom: none;
+        }
+
+        #demo-modal h4 {
+            color: #000;
+            font-size: 30px;
+            margin: 0 0 25px;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        #demo-modal .close {
+            background: #c0c3c8;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 19px;
+            font-weight: normal;
+            height: 30px;
+            opacity: 0.5;
+            padding: 0;
+            position: absolute;
+            right: 26px;
+            text-align: center;
+            top: 26px;
+            width: 30px;
+        }
+
+        #demo-modal .close span {
+            position: relative;
+            top: -3px;
+        }
+
+        #demo-modal .modal-body p {
+            color: #999;
+        }
+
+        #demo-modal .form-control,
+        #demo-modal .btn {
+            min-height: 46px;
+        }
+
+        #demo-modal .btn {
+            background-color: #1da098;
+            border: none;
+            color: #fff;
+            min-width: 150px;
+            transition: all 0.4s;
+        }
+
+        #demo-modal .btn:hover,
+        #demo-modal .btn:focus {
+            background-color: #12968d;
+        }
+
+        /*--- media queries ---*/
+        @media (max-width: 991.98px) {
+            .team {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .description {
+                left: 0;
+                padding: 0 15px;
+                position: absolute;
+                top: 10%;
+                transform: none;
+                text-align: center;
+            }
+
+            .description h1 {
+                font-size: 2em;
+            }
+
+            .description p {
+                font-size: 1.2rem;
+            }
+
+            .features {
+                margin: 0;
+            }
+
+            .team {
+                max-width: 60%;
+            }
+
+            #demo-modal .btn {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-navigation">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header header container-fluid">
+        <div class="overlay"></div>
+        <div class="description">
+            <h1>Welcome to Jael's Landing Page!</h1>
+            <p>Je suis tellement content(e) que vous soyez arrivé(e) sur ma page d'accueil ! Ce projet en JavaScript a été tellement amusant, surtout quand j'ai pu intégrer des personnes et des éléments de ma vie quotidienne. C'est un peu peu professionnel, mais je n'ai pas pu m'en empêcher. Travailler avec JavaScript est tellement plaisant car cela offre tant de liberté créative. J'espère que vous apprécierez !:></p>
+            <button class="btn btn-outline-secondary btn-lg" data-toggle="modal" data-target="#demo-modal">Tell Me More!</button>
+        </div>
+    </header>
+
+    <div class="container features">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <h3 class="feature-title">Sunflower's</h3>
+                <img src="column-1.jpg" class="img-fluid rounded-circle" alt="Feature image 1">
+                <p>Sunflowers are vibrant and cheerful blooms that symbolize positivity and happiness. With their bright yellow petals and large, sun-facing heads, they bring a sense of warmth and joy to any environment. Beyond their aesthetic appeal, sunflowers have a significant positive impact.</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <h3 class="feature-title">Beach</h3>
+                <img src="column-2.jpg" class="img-fluid rounded-circle" alt="Feature image 2">
+                <p>The beach is the ultimate summer destination, offering endless fun and relaxation. With its golden sands and sparkling blue waters, it's the perfect place to soak up the sun and unwind. The gentle sound of waves crashing against the shore creates a serene atmosphere.</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <h3 class="feature-title">Get in Touch!</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" name="">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email Address" name="email">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="4"></textarea>
+                </div>
+                <input type="submit" class="btn btn-secondary btn-block" value="Send" name="">
+            </div>
+        </div>
+    </div>
+
+    <div class="background">
+        <div class="container team">
+            <div class="row">
+                <div class="card col-lg-3 col-md-3 col-sm-4 text-center">
+                    <img class="card-img-top rounded-circle" src="team-image-1.png" alt="Team member 1">
+                    <div class="card-body">
+                        <h4 class="card-title">Norbek</h4>
+                        <p class="card-text">Wonder Boy</p>
+                    </div>
+                </div>
+                <div class="card col-lg-3 col-md-3 col-sm-4 text-center">
+                    <img class="card-img-top rounded-circle" src="team-image-2.png" alt="Team member 2">
+                    <div class="card-body">
+                        <h4 class="card-title">Tor-L</h4>
+                        <p class="card-text">Python King</p>
+                    </div>
+                </div>
+                <div class="card col-lg-3 col-md-3 col-sm-4 text-center">
+                    <img class="card-img-top rounded-circle" src="team-image-3.png" alt="Team member 3">
+                    <div class="card-body">
+                        <h4 class="card-title">Steven</h4>
+                        <p class="card-text">Ray of Sunshine</p>
+                    </div>
+                </div>
+                <div class="card col-lg-3 col-md-3 col-sm-4 text-center">
+                    <img class="card-img-top rounded-circle" src="team-image-4.png" alt="Team member 4">
+                    <div class="card-body">
+                        <h4 class="card-title">Thomas</h4>
+                        <p class="card-text">Unit Test King</p>
+                    </div>
+                </div>
+                <div class="card col-lg-3 col-md-3 col-sm-4 text-center">
+                    <img class="card-img-top rounded-circle" src="team-image-5.png" alt="Team member 5">
+                    <div class="card-body">
+                        <h4 class="card-title">Belly</h4>
+                        <p class="card-text">Evil Cat Ruler Belly</p>
+                    </div>
+                </div>
+                <div class="card col-lg-3 col-md-3 col-sm-4 text-center">
+                    <img class="card-img-top rounded-circle" src="team-image-6.png" alt="Team member 6">
+                    <div class="card-body">
+                        <h4 class="card-title">Jeff</h4>
+                        <p class="card-text">Celsius Inventor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <h6 class="text-uppercase font-weight-bold">Additional Information</h6>
+                    <p>BootStrap Project with my twist!</p>
+                    <p>CIS JavaScript Project 2</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                    <p>2014 Forest Hills Drive<br>https://www.linkedin.com/in/jael-bonilla<br>+ 212 785 3340<br>+ 678 999 8212</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copytight text-center">© 2024 Copyright: Jael Bonilla</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Show newsletter popup on page load
+            Swal.fire({
+                title: 'Subscribe to our newsletter',
+                html: '<img src="email-icon.png" alt="Newsletter Image" style="width: 100%; margin-bottom: 20px;"><input type="email" id="newsletterEmail" class="swal2-input" placeholder="Enter your email address">',
+                confirmButtonText: 'Subscribe',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const email = Swal.getPopup().querySelector('#newsletterEmail').value
+                    if (!email) {
+                        Swal.showValidationMessage(`Please enter a valid email address`)
+                    }
+                    return { email: email }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    alert("Thank you for subscribing! Email: " + result.value.email);
+                }
+            });
+
+            // Newsletter form submission inside modal
+            $("#newsletterForm").submit(function (event) {
+                event.preventDefault();
+                var email = $("#newsletterEmail").val();
+                if (email) {
+                    alert("Thank you for subscribing! Email: " + email);
+                    $("#demo-modal").modal('hide');
+                } else {
+                    alert("Please enter a valid email address.");
+                }
+            });
+        });
+    </script>
+
+    <div id="demo-modal" class="modal fade">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img class="rounded-circle mx-auto" src="email-icon.png" alt="Modal image">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Subscribe to our newsletter</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat ante luctus eu.</p>
+                    <form id="newsletterForm">
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="newsletterEmail" placeholder="Enter your email address" name="email" required>
+                            <div class="input-group-append">
+                                <input type="submit" class="btn" value="Subscribe">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
